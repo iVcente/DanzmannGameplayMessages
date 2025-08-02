@@ -1,0 +1,30 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "DanzmannGameplayMessages",
+	"Description": "A subsystem that allows listening for and broadcasting/sending messages between unconnected gameplay objects.",
+	"Category": "Dancing Man",
+	"CreatedBy": "Vicente Danzmann",
+	"CreatedByURL": "http://github.com/iVcente",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"CanContainContent": false,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "DanzmannGameplayMessages",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	],
+	"Plugins": [
+		{
+			"Name": "GameplayTagsEditor",
+			"Enabled": true
+		}
+	]
+}
