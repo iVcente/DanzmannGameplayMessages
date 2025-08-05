@@ -1,11 +1,11 @@
 # Gameplay Messages
-A plugin that contains a subsystem that allows listening for and broadcasting/sending messages between unconnected gameplay objects. The system relies in Gameplay Tags as channels and structs to transmit data.
+A plugin that contains a subsystem that allows listening for and broadcasting/sending messages between unconnected gameplay objects. The system relies on Gameplay Tags as channels and structs to transmit data.
 
 ---
 
 ### Usage Example
 
-Make sure you have added the `GameplayTags` and `DanzmannGameplayMessages` module to your project's `Build.cs` file. Then, create some Gameplay Tags:
+Make sure you have added the `GameplayTags` and `DanzmannGameplayMessages` modules to your project's `Build.cs` file. Then, create some Gameplay Tags:
 ```cpp
 // MyProjectGameplayMessagesGameplayTags.h
 
@@ -49,6 +49,10 @@ Once the channels are set up, you can broadcast and listen for Gameplay Messages
 
 struct FGameplayTag;
 
+/**
+ * Struct to store PlayerDeath Gameplay Message.
+ * You can add anything to your custom struct.
+ */
 USTRUCT(BlueprintType)
 struct FMyProjectGameplayMessage_PlayerDeath
 {
@@ -58,6 +62,10 @@ struct FMyProjectGameplayMessage_PlayerDeath
     AActor* Killer = nullptr;
 };
 
+/**
+ * Struct to store PlayerKilledEnemy Gameplay Message.
+ * You can add anything to your custom struct.
+ */
 USTRUCT(BlueprintType)
 struct FMyProjectGameplayMessage_PlayerKilledEnemy
 {
