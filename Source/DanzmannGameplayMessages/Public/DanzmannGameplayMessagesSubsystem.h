@@ -167,7 +167,7 @@ class DANZMANNGAMEPLAYMESSAGES_API UDanzmannGameplayMessagesSubsystem : public U
 		/**
 		 * Internal helper for registering a Gameplay Message listener.
 		 * @param Channel Gameplay Message channel to listen.
-		 * @param Callback Callback to be triggered when Gameplay Message is broadcast to.
+		 * @param Callback Function to be triggered when Gameplay Message is broadcast to.
 		 * @param GameplayMessageStructType Gameplay Message struct type.
 		 * @param ChannelMatchCriteria Criteria to match Channel.
 		 * @return Listener handle.
