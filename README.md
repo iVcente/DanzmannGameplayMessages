@@ -19,8 +19,8 @@ Make sure you have added the `GameplayTags` and `DanzmannGameplayMessages` modul
  */
 namespace MyProject::GameplayTags
 {
-    UE_DECLARE_GAMEPLAY_TAG_EXTERN(GameplayMessages_LocalPlayerDeath);
-    UE_DECLARE_GAMEPLAY_TAG_EXTERN(GameplayMessages_LocalPlayerKilledNpc);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(GameplayMessages_PlayerDeath);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(GameplayMessages_PlayerKilledEnemy);
 }
 
 // ---------------------------------------------------------------------- //
@@ -31,8 +31,8 @@ namespace MyProject::GameplayTags
 
 namespace MyProject::GameplayTags
 {
-    UE_DEFINE_GAMEPLAY_TAG_COMMENT(GameplayMessages_LocalPlayerDeath, "GameplayMessages.LocalPlayerDeath", "Channel used to broadcast and receive Gameplay Message that local player has died.");
-    UE_DEFINE_GAMEPLAY_TAG_COMMENT(GameplayMessages_LocalPlayerKilledNpc, "GameplayMessages.LocalPlayerKilledEnemy", "Channel used to broadcast and receive Gameplay Message that local player has killed an enemy.");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(GameplayMessages_PlayerDeath, "GameplayMessages.PlayerDeath", "Channel used to broadcast and receive Gameplay Message that player has died.");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(GameplayMessages_PlayerKilledEnemy, "GameplayMessages.PlayerKilledEnemy", "Channel used to broadcast and receive Gameplay Message that player has killed an enemy.");
 }
 ```
 
@@ -44,10 +44,9 @@ Once the channels are set up, you can broadcast and listen for Gameplay Messages
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "GameplayTags.h"
 
 #include "MyActor.generated.h"
-
-struct FGameplayTag;
 
 /**
  * Struct to store PlayerDeath Gameplay Message.
