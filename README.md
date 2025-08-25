@@ -27,7 +27,7 @@ namespace MyProject::GameplayTags
 
 // MyProjectGameplayMessagesGameplayTags.cpp
 
-#include "GameplayMessages/MyProjectGameplayMessagesGameplayTags.h"
+#include "GameplayTags/MyProjectGameplayMessagesGameplayTags.h"
 
 namespace MyProject::GameplayTags
 {
