@@ -4,7 +4,7 @@
 	"VersionName": "1.0",
 	"FriendlyName": "DanzmannGameplayMessages",
 	"Description": "A subsystem that allows listening for and broadcasting/sending messages between unconnected gameplay objects.",
-	"Category": "Dancing Man",
+	"Category": "Danzmann",
 	"CreatedBy": "Vicente Danzmann",
 	"CreatedByURL": "http://github.com/iVcente",
 	"DocsURL": "",
