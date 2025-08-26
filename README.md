@@ -7,7 +7,7 @@ A plugin that contains a subsystem that allows listening for and broadcasting/se
 
 Make sure you have added the `GameplayTags` and `DanzmannGameplayMessages` modules to your project's `Build.cs` file. Then, create some Gameplay Tags:
 ```cpp
-// MyProjectGameplayMessagesGameplayTags.h
+// MyProjectGameplayTags_GameplayMessages.h
 
 #pragma once
 
@@ -19,20 +19,20 @@ Make sure you have added the `GameplayTags` and `DanzmannGameplayMessages` modul
  */
 namespace MyProject::GameplayTags
 {
-	UE_DECLARE_GAMEPLAY_TAG_EXTERN(GameplayMessages_PlayerDeath);
-	UE_DECLARE_GAMEPLAY_TAG_EXTERN(GameplayMessages_PlayerKilledEnemy);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(GameplayMessage_PlayerDeath);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(GameplayMessage_PlayerKilledEnemy);
 }
 
 // ---------------------------------------------------------------------- //
 
-// MyProjectGameplayMessagesGameplayTags.cpp
+// MyProjectGameplayTags_GameplayMessages.cpp
 
-#include "GameplayTags/MyProjectGameplayMessagesGameplayTags.h"
+#include "GameplayTags/MyProjectGameplayTags_GameplayMessages.h"
 
 namespace MyProject::GameplayTags
 {
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(GameplayMessages_PlayerDeath, "GameplayMessages.PlayerDeath", "Channel used to broadcast and receive Gameplay Message that player has died.");
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(GameplayMessages_PlayerKilledEnemy, "GameplayMessages.PlayerKilledEnemy", "Channel used to broadcast and receive Gameplay Message that player has killed an enemy.");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(GameplayMessage_PlayerDeath, "GameplayMessage.PlayerDeath", "Channel used to broadcast and receive Gameplay Message that player has died.");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(GameplayMessage_PlayerKilledEnemy, "GameplayMessage.PlayerKilledEnemy", "Channel used to broadcast and receive Gameplay Message that player has killed an enemy.");
 }
 ```
 
@@ -96,7 +96,7 @@ class DANCINGMANPLUGINS_API AMyActor : public AActor
 #include "MyActor.h"
 
 #include "DanzmannGameplayMessagesSubsystem.h"
-#include "GameplayMessages/MyProjectGameplayMessagesGameplayTags.h"
+#include "GameplayMessages/MyProjectGameplayTags_GameplayMessages.h"
 
 void AMyActor::BeginPlay()
 {
@@ -106,7 +106,7 @@ void AMyActor::BeginPlay()
 	
     // Listen for Gameplay Message -- lambda version
     GameplayMessagesSubsystem->RegisterListener<FMyProjectGameplayMessage_PlayerDeath>(
-        MyProject::GameplayTags::GameplayMessages_PlayerDeath,
+        MyProject::GameplayTags::GameplayMessage_PlayerDeath,
         []
         (const FGameplayTag Channel, const FMyProjectGameplayMessage_PlayerDeath& GameplayMessage)
         {
@@ -115,17 +115,17 @@ void AMyActor::BeginPlay()
     );
 
     // Listen for Gameplay Message -- bind version
-    GameplayMessagesSubsystem->RegisterListener(MyProject::GameplayTags::GameplayMessages_PlayerKilledEnemy, this, &ThisClass::OnPlayerKilledEnemy);
+    GameplayMessagesSubsystem->RegisterListener(MyProject::GameplayTags::GameplayMessage_PlayerKilledEnemy, this, &ThisClass::OnPlayerKilledEnemy);
 
     // Broadcast Gameplay Message: PlayerDeath
     const FMyProjectGameplayMessage_PlayerDeath PlayerDeathPayload { this }; // Assign some appropriate value
-    GameplayMessagesSubsystem->BroadcastGameplayMessage(MyProject::GameplayTags::GameplayMessages_PlayerDeath, PlayerDeathPayload);
+    GameplayMessagesSubsystem->BroadcastGameplayMessage(MyProject::GameplayTags::GameplayMessage_PlayerDeath, PlayerDeathPayload);
 
     // Broadcast Gameplay Message: PlayerKilledEnemy
     FMyProjectGameplayMessage_PlayerKilledEnemy PlayerKilledEnemyPayload;
     PlayerKilledEnemyPayload.Victim = nullptr; // Assign some appropriate value
     PlayerKilledEnemyPayload.WeaponUsed = nullptr; // Assign some appropriate value
-    GameplayMessagesSubsystem->BroadcastGameplayMessage(MyProject::GameplayTags::GameplayMessages_PlayerKilledEnemy, PlayerKilledEnemyPayload);
+    GameplayMessagesSubsystem->BroadcastGameplayMessage(MyProject::GameplayTags::GameplayMessage_PlayerKilledEnemy, PlayerKilledEnemyPayload);
 }
 ```
 
