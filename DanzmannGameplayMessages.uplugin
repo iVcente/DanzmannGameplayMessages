@@ -6,7 +6,7 @@
 	"Description": "A subsystem that allows listening for and broadcasting/sending messages between unconnected gameplay objects.",
 	"Category": "Danzmann",
 	"CreatedBy": "Vicente Danzmann",
-	"CreatedByURL": "http://github.com/iVcente",
+	"CreatedByURL": "https://github.com/iVcente",
 	"DocsURL": "https://github.com/iVcente/DanzmannGameplayMessages/blob/main/README.md",
 	"MarketplaceURL": "",
 	"SupportURL": "",
