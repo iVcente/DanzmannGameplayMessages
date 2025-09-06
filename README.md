@@ -1,4 +1,4 @@
-# Gameplay Messages
+# DanzmannGameplayMessages
 A plugin that contains a subsystem that allows listening for and broadcasting/sending messages between unconnected gameplay objects. The system relies on Gameplay Tags as channels and structs to transmit data.
 
 ---
@@ -22,9 +22,9 @@ namespace MyProject::GameplayTags
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(GameplayMessage_PlayerDeath);
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(GameplayMessage_PlayerKilledEnemy);
 }
+```
 
-// ---------------------------------------------------------------------- //
-
+```cpp
 // MyProjectGameplayTags_GameplayMessages.cpp
 
 #include "GameplayTags/MyProjectGameplayTags_GameplayMessages.h"
@@ -88,9 +88,9 @@ class DANCINGMANPLUGINS_API AMyActor : public AActor
     private:
         void OnPlayerKilledEnemy(const FGameplayTag Channel, const FMyProjectGameplayMessage_PlayerKilledEnemy& GameplayMessage);
 };
+```
 
-// ---------------------------------------------------------------------- //
-
+```cpp
 // MyActor.cpp
 
 #include "MyActor.h"
