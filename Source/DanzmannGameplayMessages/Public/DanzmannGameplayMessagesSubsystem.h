@@ -73,9 +73,9 @@ class DANZMANNGAMEPLAYMESSAGES_API UDanzmannGameplayMessagesSubsystem : public U
 		void BP_BroadcastGameplayMessage(const FGameplayTag Channel, const int32& GameplayMessage);
 
 		/**
-		 * By exposing a function to BP, Unreal will auto-generate a new version -- DECLARE_FUNCTION (exec...) -- of the native function. This is the actual function used by BP virtual machine (VM).
+		 * By exposing a function to BP, Unreal will auto-generate a new version -- DECLARE_FUNCTION(exec...) -- of the native function. This is the actual function used by BP virtual machine (VM).
 		 * You can find these auto-generated functions within .gen.cpp files.
-		 * What we're doing here is adding the CustomThunk specifier to the native function we'd like to expose and providing a custom DECLARE_FUNCTION (exec...) for it.
+		 * What we're doing here is adding the CustomThunk specifier to the native function we'd like to expose and providing a custom DECLARE_FUNCTION(exec...) for it.
 		 * This way we can do our own implementation of the BP VM function, allowing us to parse the function parameters and enable a wildcard node for it.
 		 */
 		DECLARE_FUNCTION(execBP_BroadcastGameplayMessage);
