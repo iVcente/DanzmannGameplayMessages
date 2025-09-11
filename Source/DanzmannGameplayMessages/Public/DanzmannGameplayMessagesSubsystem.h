@@ -131,7 +131,7 @@ class DANZMANNGAMEPLAYMESSAGES_API UDanzmannGameplayMessagesSubsystem : public U
 	     *       );
 		 */
 		template<typename TListener = UObject, typename TGameplayMessage>
-		FDanzmannGameplayMessagesListenerHandle RegisterListener(const FGameplayTag Channel, TListener* Listener, void(TListener::* Callback)(const FGameplayTag, const TGameplayMessage&), const EDanzmannGameplayMessagesMatchCriteria ChannelMatchCriteria = EDanzmannGameplayMessagesMatchCriteria::ExactMatch)
+		FDanzmannGameplayMessagesListenerHandle RegisterListener(const FGameplayTag Channel, TListener* Listener, void(TListener::*Callback)(const FGameplayTag, const TGameplayMessage&), const EDanzmannGameplayMessagesMatchCriteria ChannelMatchCriteria = EDanzmannGameplayMessagesMatchCriteria::ExactMatch)
 		{
 			TWeakObjectPtr<TListener> WeakListener = Listener;
 			
