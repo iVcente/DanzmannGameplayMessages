@@ -6,7 +6,7 @@
 #include "GameplayTagContainer.h"
 #include "Subsystems/GameInstanceSubsystem.h"
 
-#include "DanzmannGameplayMessagesSubsystem.generated.h"
+#include "DanzmannGameplayMessagesGameInstanceSubsystem.generated.h"
 
 class UDanzmannAsyncAction_ListenForGameplayMessages;
 struct FFrame;
@@ -19,15 +19,15 @@ struct FFrame;
  * Listeners can register to specific Gameplay Message types and Gameplay Tag-based channels without needing
  * direct references to the senders.
  * You can get the subsystem as the following:
- *  - UGameInstance::GetSubsystem<UDanzmannGameplayMessagesSubsystem>(WorldContextObject);
- *  - GetGameInstance()->GetSubsystem<UDanzmannGameplayMessagesSubsystem>();
- *  - UDanzmannGameplayMessagesSubsystem::Get(WorldContextObject);
+ *  - UGameInstance::GetSubsystem<UDanzmannGameplayMessagesGameInstanceSubsystem>(WorldContextObject);
+ *  - GetGameInstance()->GetSubsystem<UDanzmannGameplayMessagesGameInstanceSubsystem>();
+ *  - UDanzmannGameplayMessagesGameInstanceSubsystem::Get(WorldContextObject);
  *
  * Note that call order when there are multiple listeners for the same channel is
  * not guaranteed and can change over time!
  */
 UCLASS()
-class DANZMANNGAMEPLAYMESSAGES_API UDanzmannGameplayMessagesSubsystem : public UGameInstanceSubsystem
+class DANZMANNGAMEPLAYMESSAGES_API UDanzmannGameplayMessagesGameInstanceSubsystem : public UGameInstanceSubsystem
 {
 	GENERATED_BODY()
 
@@ -38,14 +38,14 @@ class DANZMANNGAMEPLAYMESSAGES_API UDanzmannGameplayMessagesSubsystem : public U
 		virtual void Deinitialize() override;
 	
 		/**
-		 * Get a reference to Gameplay Messages Subsystem according to the Game Instance associated with the world of the specified object.
-		 * @return The Gameplay Messages Subsystem.
+		 * Get a reference to Gameplay Messages Game Instance Subsystem according to the Game Instance associated with the world of the specified object.
+		 * @return A reference to Gameplay Messages Game Instance Subsystem.
 		 */
-		static UDanzmannGameplayMessagesSubsystem& Get(const UObject* WorldContextObject);
+		static UDanzmannGameplayMessagesGameInstanceSubsystem* Get(const UObject* WorldContextObject);
 
 		/**
-		 * Check if there is a valid instance of the Gameplay Messages Subsystem associated with the world of the specified object.
-		 * @return Whether Gameplay Messages Subsystem is valid or not.
+		 * Check if there is a valid instance of the Gameplay Messages Game Instance Subsystem associated with the world of the specified object.
+		 * @return Whether Gameplay Messages Game Instance Subsystem is valid or not.
 		 */
 		static bool HasInstance(const UObject* WorldContextObject);
 

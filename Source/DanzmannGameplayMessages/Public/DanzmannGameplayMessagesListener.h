@@ -23,7 +23,7 @@ enum class EDanzmannGameplayMessagesMatchCriteria : uint8
 
 /**
  * A handle that can be used to remove a previously registered Gameplay Messages listener.
- * @see UDanzmannGameplayMessagesSubsystem::RegisterListener() and UDanzmannGameplayMessagesSubsystem::UnregisterListener().
+ * @see UDanzmannGameplayMessagesGameInstanceSubsystem::RegisterListener() and UDanzmannGameplayMessagesGameInstanceSubsystem::UnregisterListener().
  */
 USTRUCT(BlueprintType)
 struct DANZMANNGAMEPLAYMESSAGES_API FDanzmannGameplayMessagesListenerHandle
@@ -31,9 +31,9 @@ struct DANZMANNGAMEPLAYMESSAGES_API FDanzmannGameplayMessagesListenerHandle
     GENERATED_BODY()
 
     /**
-     * Allow UDanzmannGameplayMessagesSubsystem access to protected/private members. 
+     * Allow UDanzmannGameplayMessagesGameInstanceSubsystem access to protected/private members. 
      */
-    friend class UDanzmannGameplayMessagesSubsystem;
+    friend class UDanzmannGameplayMessagesGameInstanceSubsystem;
 	
     public:
         FDanzmannGameplayMessagesListenerHandle()

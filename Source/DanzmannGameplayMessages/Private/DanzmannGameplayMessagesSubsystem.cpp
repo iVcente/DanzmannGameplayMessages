@@ -1,6 +1,6 @@
 // Copyright (C) 2025 Vicente Danzmann. All Rights Reserved.
 
-#include "DanzmannGameplayMessagesSubsystem.h"
+#include "DanzmannGameplayMessagesGameInstanceSubsystem.h"
 #include "DanzmannLogGameplayMessages.h"
 #include "Engine/Engine.h"
 #include "Engine/GameInstance.h"
@@ -8,32 +8,32 @@
 #include "UObject/ScriptMacros.h"
 #include "UObject/Stack.h"
 
-void UDanzmannGameplayMessagesSubsystem::Deinitialize()
+void UDanzmannGameplayMessagesGameInstanceSubsystem::Deinitialize()
 {
 	ListenerMap.Reset();
 
 	Super::Deinitialize();
 }
 
-UDanzmannGameplayMessagesSubsystem& UDanzmannGameplayMessagesSubsystem::Get(const UObject* WorldContextObject)
+UDanzmannGameplayMessagesGameInstanceSubsystem* UDanzmannGameplayMessagesGameInstanceSubsystem::Get(const UObject* WorldContextObject)
 {
 	const UWorld* World = GEngine->GetWorldFromContextObject(WorldContextObject, EGetWorldErrorMode::LogAndReturnNull);
 	checkf(IsValid(World), TEXT("[%hs] World is not valid."), __FUNCTION__);
 	
-	UDanzmannGameplayMessagesSubsystem* GameplayMessagesSubsystem = World->GetGameInstance()->GetSubsystem<UDanzmannGameplayMessagesSubsystem>();
+	UDanzmannGameplayMessagesGameInstanceSubsystem* GameplayMessagesSubsystem = World->GetGameInstance()->GetSubsystem<UDanzmannGameplayMessagesGameInstanceSubsystem>();
 	checkf(IsValid(GameplayMessagesSubsystem), TEXT("[%hs] Gameplay Message Subsystem is not valid."), __FUNCTION__);
 	
-	return *GameplayMessagesSubsystem;
+	return GameplayMessagesSubsystem;
 }
 
-bool UDanzmannGameplayMessagesSubsystem::HasInstance(const UObject* WorldContextObject)
+bool UDanzmannGameplayMessagesGameInstanceSubsystem::HasInstance(const UObject* WorldContextObject)
 {
 	const UWorld* World = GEngine->GetWorldFromContextObject(WorldContextObject, EGetWorldErrorMode::ReturnNull);
-	const UDanzmannGameplayMessagesSubsystem* GameplayMessagesSubsystem = IsValid(World) ? World->GetGameInstance()->GetSubsystem<UDanzmannGameplayMessagesSubsystem>() : nullptr;
+	const UDanzmannGameplayMessagesGameInstanceSubsystem* GameplayMessagesSubsystem = IsValid(World) ? World->GetGameInstance()->GetSubsystem<UDanzmannGameplayMessagesGameInstanceSubsystem>() : nullptr;
 	return IsValid(GameplayMessagesSubsystem);
 }
 
-void UDanzmannGameplayMessagesSubsystem::BroadcastGameplayMessage_Internal(const FGameplayTag Channel, const UScriptStruct* GameplayMessageStructType, const void* GameplayMessagePayload)
+void UDanzmannGameplayMessagesGameInstanceSubsystem::BroadcastGameplayMessage_Internal(const FGameplayTag Channel, const UScriptStruct* GameplayMessageStructType, const void* GameplayMessagePayload)
 {
 	// Log the broadcast details if we have increased LogDanzmannGameplayMessages verbosity
 	if (UE_LOG_ACTIVE(LogDanzmannGameplayMessages, Verbose))
@@ -96,13 +96,13 @@ void UDanzmannGameplayMessagesSubsystem::BroadcastGameplayMessage_Internal(const
 	}
 }
 
-void UDanzmannGameplayMessagesSubsystem::BP_BroadcastGameplayMessage(const FGameplayTag Channel, const int32& GameplayMessage)
+void UDanzmannGameplayMessagesGameInstanceSubsystem::BP_BroadcastGameplayMessage(const FGameplayTag Channel, const int32& GameplayMessage)
 {
 	// This will never be called, the exec version below will be hit instead
 	checkNoEntry();
 }
 
-DEFINE_FUNCTION(UDanzmannGameplayMessagesSubsystem::execBP_BroadcastGameplayMessage)
+DEFINE_FUNCTION(UDanzmannGameplayMessagesGameInstanceSubsystem::execBP_BroadcastGameplayMessage)
 {
 	// Read the first parameter: a regular FGameplayTag passed from Blueprint
 	P_GET_STRUCT(FGameplayTag, Channel);
@@ -130,7 +130,7 @@ DEFINE_FUNCTION(UDanzmannGameplayMessagesSubsystem::execBP_BroadcastGameplayMess
 	}
 }
 
-FDanzmannGameplayMessagesListenerHandle UDanzmannGameplayMessagesSubsystem::RegisterListener_Internal(const FGameplayTag Channel, TFunction<void(FGameplayTag, const UScriptStruct*, const void*)>&& Callback, const UScriptStruct* GameplayMessageStructType, const EDanzmannGameplayMessagesMatchCriteria ChannelMatchCriteria)
+FDanzmannGameplayMessagesListenerHandle UDanzmannGameplayMessagesGameInstanceSubsystem::RegisterListener_Internal(const FGameplayTag Channel, TFunction<void(FGameplayTag, const UScriptStruct*, const void*)>&& Callback, const UScriptStruct* GameplayMessageStructType, const EDanzmannGameplayMessagesMatchCriteria ChannelMatchCriteria)
 {
 	FDanzmannChannelListenerList& ListenersList = ListenerMap.FindOrAdd(Channel);
 
@@ -144,7 +144,7 @@ FDanzmannGameplayMessagesListenerHandle UDanzmannGameplayMessagesSubsystem::Regi
 	return FDanzmannGameplayMessagesListenerHandle(Channel, Entry.HandleId);
 }
 
-void UDanzmannGameplayMessagesSubsystem::UnregisterListener(const FDanzmannGameplayMessagesListenerHandle Handle)
+void UDanzmannGameplayMessagesGameInstanceSubsystem::UnregisterListener(const FDanzmannGameplayMessagesListenerHandle Handle)
 {
 	if (Handle.IsValid())
 	{
@@ -156,7 +156,7 @@ void UDanzmannGameplayMessagesSubsystem::UnregisterListener(const FDanzmannGamep
 	}
 }
 
-void UDanzmannGameplayMessagesSubsystem::UnregisterListener_Internal(const FGameplayTag Channel, int32 HandleId)
+void UDanzmannGameplayMessagesGameInstanceSubsystem::UnregisterListener_Internal(const FGameplayTag Channel, int32 HandleId)
 {
 	if (FDanzmannChannelListenerList* ListenersList = ListenerMap.Find(Channel))
 	{

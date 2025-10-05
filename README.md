@@ -1,11 +1,11 @@
 # DanzmannGameplayMessages
 A plugin that contains a subsystem that allows listening for and broadcasting/sending messages between unconnected gameplay objects. The system relies on Gameplay Tags as channels and structs to transmit data.
 
----
+## Usage Example
 
-### Usage Example
+> Make sure you have added the `GameplayTags` and `DanzmannGameplayMessages` modules to your project's Build.cs file. Also, enable `DanzmannGameplayMessages` in your `.uproject` file.
 
-Make sure you have added the `GameplayTags` and `DanzmannGameplayMessages` modules to your project's `Build.cs` file. Then, create some Gameplay Tags:
+Start by creating some Gameplay Tags:
 ```cpp
 // MyProjectGameplayTags_GameplayMessages.h
 
@@ -95,14 +95,14 @@ class DANCINGMANPLUGINS_API AMyActor : public AActor
 
 #include "MyActor.h"
 
-#include "DanzmannGameplayMessagesSubsystem.h"
+#include "DanzmannGameplayMessagesGameInstanceSubsystem.h"
 #include "GameplayMessages/MyProjectGameplayTags_GameplayMessages.h"
 
 void AMyActor::BeginPlay()
 {
     Super::BeginPlay();
 
-    UDanzmannGameplayMessagesSubsystem* GameplayMessagesSubsystem = UDanzmannGameplayMessagesSubsystem::Get(GetWorld());
+    UDanzmannGameplayMessagesGameInstanceSubsystem* GameplayMessagesSubsystem = UDanzmannGameplayMessagesGameInstanceSubsystem::Get(GetWorld());
 	
     // Listen for Gameplay Message -- lambda version
     GameplayMessagesSubsystem->RegisterListener<FMyProjectGameplayMessage_PlayerDeath>(
