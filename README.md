@@ -3,7 +3,7 @@ A plugin that contains a subsystem that allows listening for and broadcasting/se
 
 ## Usage Example
 
-> Make sure you have added the `GameplayTags` and `DanzmannGameplayMessages` modules to your project's Build.cs file. Also, enable `DanzmannGameplayMessages` in your `.uproject` file.
+> Make sure you have added the `GameplayTags` and `DanzmannGameplayMessages` modules to your project's `Build.cs` file. Also, enable `DanzmannGameplayMessages` in your `.uproject` file.
 
 Start by creating some Gameplay Tags:
 ```cpp
